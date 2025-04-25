@@ -17,6 +17,7 @@ import org.example.project.theme.WaterLabCard
 import org.example.project.theme.WaterLabButton
 import org.example.project.theme.WaterLabTextField
 import kotlinx.coroutines.launch
+import org.example.project.pdf.pdfContrato
 
 @Composable
 fun Tela1() {
@@ -436,7 +437,7 @@ fun Tela1() {
                 WaterLabButton(
                     onClick = {
                         try {
-                            pdfOrcamento(
+                            pdfContrato(
                                 nomeCliente, cnpj, nomeComercial, siteEmpresa,
                                 endereco, telefone, emailEmpresa, nomeRepresentante,
                                 foneRepresentante, emailRepresentante, nomeLaboratorio,
