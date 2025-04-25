@@ -9,8 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.example.project.models.Amostra
 import org.example.project.models.Item
 import org.example.project.models.listaItens
+import org.example.project.models.tabelaAmostra
 import org.example.project.theme.WaterLabCard
 import org.example.project.theme.WaterLabButton
 import org.example.project.theme.WaterLabTextField
@@ -28,7 +30,8 @@ fun Tela2() {
     var email by remember { mutableStateOf("") }
     var tipoDeAmostra by remember { mutableStateOf("") }
 
-    val opcoesSelecionadas = remember { mutableStateListOf<Item>() }
+    val opcoesSelecionadasOrcamento = remember { mutableStateListOf<Item>() }
+    val opcoesSelecionadasParametros = remember { mutableStateListOf<Amostra>() }
     val scrollState = rememberScrollState()
 
     Column(
@@ -160,6 +163,7 @@ fun Tela2() {
                             modifier = Modifier.padding(bottom = 16.dp)
                         )
 
+                        // Seção de Orcamento
                         // Grid de checkboxes em duas colunas
                         val numColunas = 2
                         val itensPorColuna = listaItens.chunked((listaItens.size + numColunas - 1) / numColunas)
@@ -179,10 +183,10 @@ fun Tela2() {
                                             modifier = Modifier.padding(vertical = 4.dp)
                                         ) {
                                             Checkbox(
-                                                checked = opcao in opcoesSelecionadas,
+                                                checked = opcao in opcoesSelecionadasOrcamento,
                                                 onCheckedChange = { isChecked ->
-                                                    if (isChecked) opcoesSelecionadas.add(opcao)
-                                                    else opcoesSelecionadas.remove(opcao)
+                                                    if (isChecked) opcoesSelecionadasOrcamento.add(opcao)
+                                                    else opcoesSelecionadasOrcamento.remove(opcao)
                                                 },
                                                 colors = CheckboxDefaults.colors(
                                                     checkedColor = MaterialTheme.colors.primary
@@ -197,9 +201,80 @@ fun Tela2() {
                                     }
                                 }
                             }
+                        } // fadfs
+                    }
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+                // Seção de Parametros
+                WaterLabCard {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        // Card do título
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 24.dp),
+                            elevation = 4.dp,
+                            backgroundColor = MaterialTheme.colors.primary
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Ficha de Parametros",
+                                    style = MaterialTheme.typography.h4,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colors.onPrimary
+                                )
+                            }
+                        }
+
+                        // Grid de checkboxes em duas colunas
+                        val numColunasTabela = 2
+                        val itensPorColunaTabela =
+                            tabelaAmostra.chunked((tabelaAmostra.size + numColunasTabela - 1) / numColunasTabela)
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            itensPorColunaTabela.forEach { colunaOpcoes ->
+                                Column(
+                                    modifier = Modifier.weight(1f).padding(end = 8.dp),
+                                    horizontalAlignment = Alignment.Start
+                                ) {
+                                    colunaOpcoes.forEach { opcao ->
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            modifier = Modifier.padding(vertical = 4.dp)
+                                        ) {
+                                            Checkbox(
+                                                checked = opcao in opcoesSelecionadasParametros,
+                                                onCheckedChange = { isChecked ->
+                                                    if (isChecked) opcoesSelecionadasParametros.add(opcao)
+                                                    else opcoesSelecionadasParametros.remove(opcao)
+                                                },
+                                                colors = CheckboxDefaults.colors(
+                                                    checkedColor = MaterialTheme.colors.primary
+                                                )
+                                            )
+                                            Text(
+                                                text = "${opcao.parametro} - ${opcao.tipoRecipiente} - ${opcao.volume},${opcao.preservacao},${opcao.prazo} ",
+                                                style = MaterialTheme.typography.body2,
+                                                modifier = Modifier.padding(start = 8.dp)
+                                            )
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+
 
                 Spacer(modifier = Modifier.height(24.dp))
                 //TODO adiconar algo pra ver o valor total
@@ -209,7 +284,7 @@ fun Tela2() {
                         println("Teste")
                     },
                     text = "Gerar Relatório PDF",
-                    enabled = opcoesSelecionadas.isNotEmpty()
+                    enabled = opcoesSelecionadasParametros.isNotEmpty()
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
