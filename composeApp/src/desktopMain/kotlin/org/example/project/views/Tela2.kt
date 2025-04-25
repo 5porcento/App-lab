@@ -274,10 +274,15 @@ fun Tela2() {
                         }
                     }
                 }
-
-
                 Spacer(modifier = Modifier.height(24.dp))
                 //TODO adiconar algo pra ver o valor total
+//                fun somarValor(){
+//                    var soma = opcoesSelecionadasOrcamento
+//                }
+
+
+
+
 
                 WaterLabButton(
                     onClick = {
@@ -292,4 +297,3 @@ fun Tela2() {
         }
     }
 }
-
