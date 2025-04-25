@@ -13,10 +13,21 @@ import org.example.project.models.Item
 import org.example.project.models.listaItens
 import org.example.project.theme.WaterLabCard
 import org.example.project.theme.WaterLabButton
+import org.example.project.theme.WaterLabTextField
 
 
 @Composable
 fun Tela2() {
+    var nomeCliente by remember { mutableStateOf("") }
+    var cpfCliente by remember { mutableStateOf("") }
+    var enderecoCliente by remember { mutableStateOf("") }
+    var cidade by remember { mutableStateOf("") }
+    var estado by remember { mutableStateOf("PA") }
+    var cep by remember { mutableStateOf("") }
+    var telefone by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var tipoDeAmostra by remember { mutableStateOf("") }
+
     val opcoesSelecionadas = remember { mutableStateListOf<Item>() }
     val scrollState = rememberScrollState()
 
@@ -67,11 +78,80 @@ fun Tela2() {
                         horizontalAlignment = Alignment.Start
                     ) {
                         Text(
-                            text = "Parâmetros de Análise",
+                            text = "Dados",
                             style = MaterialTheme.typography.h6,
                             color = MaterialTheme.colors.primary,
                             modifier = Modifier.padding(bottom = 16.dp)
                         )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            WaterLabTextField(
+                                value = nomeCliente,
+                                onValueChange = { nomeCliente = it },
+                                label = "Cliente",
+                                modifier = Modifier.weight(1f)
+                            )
+
+                            WaterLabTextField(
+                                value = cpfCliente,
+                                onValueChange = { cpfCliente = it },
+                                label = "CPF",
+                                modifier = Modifier.weight(1f)
+                            )
+                            WaterLabTextField(
+                                value = enderecoCliente,
+                                onValueChange = {enderecoCliente = it},
+                                label = "Endereço",
+                                modifier = Modifier.weight(1f)
+                            )}
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                            WaterLabTextField(
+                                value = cidade,
+                                onValueChange = {cidade = it},
+                                label = "Cidade",
+                                modifier = Modifier.weight(1f)
+                            )
+                            WaterLabTextField(
+                                value = estado,
+                                onValueChange = {estado = it},
+                                label = "Estado",
+                                modifier = Modifier.weight(1f)
+                            )
+                            WaterLabTextField(
+                                value = cep,
+                                onValueChange = {cep = it},
+                                label = "CEP",
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            WaterLabTextField(
+                                value = telefone,
+                                onValueChange = {telefone = it},
+                                label = "Telefone",
+                                modifier = Modifier.weight(1f)
+                            )
+                            WaterLabTextField(
+                                value = email,
+                                onValueChange = {email = it},
+                                label = "Email",
+                                modifier = Modifier.weight(1f)
+                            )
+                            WaterLabTextField(
+                                value = tipoDeAmostra,
+                                onValueChange = {tipoDeAmostra = it},
+                                label = "Tipo de amostra",
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
 
                         Text(
                             text = "Selecione os parâmetros que deseja incluir no relatório:",
