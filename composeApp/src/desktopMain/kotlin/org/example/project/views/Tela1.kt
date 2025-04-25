@@ -437,7 +437,7 @@ fun Tela1() {
                 WaterLabButton(
                     onClick = {
                         try {
-                            pdfContrato(
+                            pdfOrcamento(
                                 nomeCliente, cnpj, nomeComercial, siteEmpresa,
                                 endereco, telefone, emailEmpresa, nomeRepresentante,
                                 foneRepresentante, emailRepresentante, nomeLaboratorio,
