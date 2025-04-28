@@ -11,13 +11,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.example.project.models.formaPagamentoList
 import org.example.project.pdf.pdfOrcamento
-import org.example.project.viewModels.CampoTexto
-import org.example.project.viewModels.SecaoFormulario
 import org.example.project.theme.WaterLabCard
 import org.example.project.theme.WaterLabButton
 import org.example.project.theme.WaterLabTextField
-import kotlinx.coroutines.launch
-import org.example.project.pdf.pdfContrato
+
 
 @Composable
 fun Tela1() {
@@ -308,7 +305,6 @@ fun Tela1() {
                             onValueChange = { detalhesDoServico = it },
                             label = "Descrição do Serviço"
                         )
-
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
