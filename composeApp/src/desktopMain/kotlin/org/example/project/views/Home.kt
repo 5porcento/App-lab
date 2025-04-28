@@ -34,6 +34,8 @@ fun Home() {
     val opcoesTratamento = remember { mutableStateListOf<String>() }
     val usoDaAgua = remember { mutableStateListOf<String>() }
     val origemAmostra = remember { mutableStateListOf<String>() }
+    val parametrosSelecionados = remember {  mutableStateListOf<String>() }
+
     val numColunas = 2 // Número de colunas para os checkboxes
 
     val scrollState = rememberScrollState()
@@ -416,6 +418,124 @@ fun Home() {
                                 }
                             }
                         }
+
+                        // Seção Origem da agua
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            elevation = 2.dp,
+                            backgroundColor = MaterialTheme.colors.surface
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(16.dp)
+                            ) {
+                                Text(
+                                    text = "Origem da agua",
+                                    style = MaterialTheme.typography.subtitle1,
+                                    color = MaterialTheme.colors.primary,
+                                    fontWeight = FontWeight.Medium,
+                                    modifier = Modifier.padding(bottom = 12.dp)
+                                )
+
+                                // Organizando os checkboxes em duas colunas
+                                val opcoesOrigemPorColuna = origemAmostraList.chunked((origemAmostraList.size + numColunas - 1) / numColunas)
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    opcoesOrigemPorColuna.forEach { colunaOpcoes ->
+                                        Column(
+                                            modifier = Modifier.weight(1f).padding(end = 8.dp),
+                                            horizontalAlignment = Alignment.Start
+                                        ) {
+                                            colunaOpcoes.forEach { opcao ->
+                                                Row(
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    modifier = Modifier.padding(vertical = 4.dp)
+                                                ) {
+                                                    Checkbox(
+                                                        checked = opcao in origemAmostra,
+                                                        onCheckedChange = { isChecked ->
+                                                            if (isChecked) origemAmostra.add(opcao)
+                                                            else origemAmostra.remove(opcao)
+                                                        },
+                                                        colors = CheckboxDefaults.colors(
+                                                            checkedColor = MaterialTheme.colors.primary
+                                                        )
+                                                    )
+                                                    Text(
+                                                        text = opcao,
+                                                        style = MaterialTheme.typography.body2,
+                                                        modifier = Modifier.padding(start = 8.dp)
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } // aqer
+
+                        // Seção Parametro
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            elevation = 2.dp,
+                            backgroundColor = MaterialTheme.colors.surface
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(16.dp)
+                            ) {
+                                Text(
+                                    text = "Parâmetros Selecionados:",
+                                    style = MaterialTheme.typography.subtitle1,
+                                    color = MaterialTheme.colors.primary,
+                                    fontWeight = FontWeight.Medium,
+                                    modifier = Modifier.padding(bottom = 12.dp)
+                                )
+
+                                // Organizando os checkboxes em duas colunas
+                                val opcoesParametrosPorColuna = parametrosSelecionadosList.chunked((parametrosSelecionadosList.size + numColunas - 1) / numColunas)
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    opcoesParametrosPorColuna.forEach { colunaOpcoes ->
+                                        Column(
+                                            modifier = Modifier.weight(1f).padding(end = 8.dp),
+                                            horizontalAlignment = Alignment.Start
+                                        ) {
+                                            colunaOpcoes.forEach { opcao ->
+                                                Row(
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    modifier = Modifier.padding(vertical = 4.dp)
+                                                ) {
+                                                    Checkbox(
+                                                        checked = opcao in parametrosSelecionados,
+                                                        onCheckedChange = { isChecked ->
+                                                            if (isChecked) parametrosSelecionados.add(opcao)
+                                                            else parametrosSelecionados.remove(opcao)
+                                                        },
+                                                        colors = CheckboxDefaults.colors(
+                                                            checkedColor = MaterialTheme.colors.primary
+                                                        )
+                                                    )
+                                                    Text(
+                                                        text = opcao,
+                                                        style = MaterialTheme.typography.body2,
+                                                        modifier = Modifier.padding(start = 8.dp)
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -429,7 +549,8 @@ fun Home() {
                                 nomeProjeto, localColeta, horaColeta, dataColeta,
                                 numeroAmostra, responsavelColeta, opcoesLista.toList(),
                                 opcoesTratamento.toList(), usoDaAgua.toList(),
-                                origemAmostra.toList()
+                                origemAmostra.toList(),
+                                parametrosSelecionados.toList()
                             )
                             showSuccessDialog = true
                         } catch (e: Exception) {
