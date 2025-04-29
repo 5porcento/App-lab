@@ -275,6 +275,15 @@ fun pdfOrcamento(
             "Forma de Pagamento:" to formaDePagamento.joinToString(", ")
         ))
 
+        desenharTituloDeSecao("5. DO PAGAMENTO")
+        desenharTabelaSimples(listOf(
+            "Pagamento:" to "Dados bancários para pagamento (somente via transferência ou depósito):" +
+                    "Banco do Brasil" +
+                    "Agência: 3702-8" +
+                    "Conta Corrente: 35.174-1" +
+                    "Razão Social/CNPJ: Fundação de Ciência e Tecnologia Guamá - 11.024.200/0001-09"
+        ))
+
         desenharAssinaturas()
         desenharRodapeCompleto()
 
