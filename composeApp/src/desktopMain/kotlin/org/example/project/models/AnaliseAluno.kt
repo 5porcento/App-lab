@@ -27,3 +27,6 @@ val origemAmostraList = listOf(
     "Água Subterrânea - Individual (SAI)",
     "Fonte"
 )
+val parametrosSelecionadosList = listOf(
+    "Turbidez", "Cor", "pH" , "Condutividade" , "OD" , "STD" , "Nitrito" , "Nitrato" , "Fosfato" , "Coliformes Totais"
+)
