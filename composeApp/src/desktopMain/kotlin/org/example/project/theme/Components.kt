@@ -135,16 +135,8 @@ fun WaterLabTextField(
 }
 
 @Composable
-fun WaterDropIndicator(
-    modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colors.primary
-) {
-    Box(
-        modifier = modifier
-            .size(8.dp)
-            .clip(RoundedCornerShape(4.dp))
-            .background(color)
-    )
+fun WaterTable(){
+
 }
 
 @Composable
@@ -337,6 +329,16 @@ fun LabMenuBar(
                     text = "Orçamento",
                     isSelected = currentScreen == Views.Tela2,
                     onClick = { onScreenChange(Views.Tela2) }
+                )
+                MenuButton(
+                    text = "Ficha Interna",
+                    isSelected = currentScreen == Views.Tela3,
+                    onClick = {onScreenChange(Views.Tela3)}
+                )
+                MenuButton(
+                    text = "Boletim de ensaio",
+                    isSelected = currentScreen == Views.Tela4,
+                    onClick = {onScreenChange(Views.Tela4)}
                 )
             }
         }
