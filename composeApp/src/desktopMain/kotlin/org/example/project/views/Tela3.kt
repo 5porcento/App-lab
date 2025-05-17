@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -56,8 +58,38 @@ fun Tela3() {
     var Unidadeturb by remember { mutableStateOf("") }
     var Unidadecor by remember { mutableStateOf("") }
     var observacao by remember { mutableStateOf("") }
+    var showErrorDialog by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+    var showSuccessDialog by remember { mutableStateOf(false) }
 
     val scrollState = rememberScrollState()
+
+
+    if (showErrorDialog) {
+        AlertDialog(
+            onDismissRequest = { showErrorDialog = false },
+            title = { Text("Erro") },
+            text = { Text(errorMessage) },
+            confirmButton = {
+                Button(onClick = { showErrorDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+
+    if (showSuccessDialog) {
+        AlertDialog(
+            onDismissRequest = { showSuccessDialog = false },
+            title = { Text("Sucesso") },
+            text = { Text("PDF gerado com sucesso!") },
+            confirmButton = {
+                Button(onClick = { showSuccessDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -311,8 +343,37 @@ fun Tela3() {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 WaterLabButton(
-                    onClick = { pdfInterno() }, text = "Gerar Documento"
+                    onClick = {try {
+                        pdfInterno(data,
+                            clienteIdentficacao,
+                            identificacaoInterna,
+                            analista,
+                            Equipamentood,
+                            Equipamentoph,
+                            Equipamentostd,
+                            Equipamentocond,
+                            Equipamentoturb,
+                            Equipamentocor,
+                            Resultadood,
+                            Resultadoph,
+                            Resultadostd,
+                            Resultadocond,
+                            Resultadoturb,
+                            Resultadocor,
+                            Unidadeod,
+                            Unidadeph,
+                            Unidadestd,
+                            Unidadecond,
+                            Unidadeturb,
+                            Unidadecor,
+                            observacao)
+                    }catch (e: Exception){
+                        errorMessage = "Erro ao gerar PDF: ${e.message}"
+                        showErrorDialog = true
+                    }
+                     }, text = "Gerar Documento"
                 )
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
 

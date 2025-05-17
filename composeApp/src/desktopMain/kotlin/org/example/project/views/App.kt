@@ -38,7 +38,7 @@ fun App() {
                         Views.Tela1 -> Tela1()
                         Views.Tela2 -> Tela2()
                         Views.Tela3 ->Tela3()
-                        Views.Tela4 -> Tela4()
+                        Views.Tela4 ->Tela4()
                     }
                 }
             }

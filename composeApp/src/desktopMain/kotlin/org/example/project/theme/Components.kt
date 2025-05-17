@@ -336,7 +336,7 @@ fun LabMenuBar(
                     onClick = {onScreenChange(Views.Tela3)}
                 )
                 MenuButton(
-                    text = "Boletim de ensaio",
+                    text = "Registro de Analise",
                     isSelected = currentScreen == Views.Tela4,
                     onClick = {onScreenChange(Views.Tela4)}
                 )
