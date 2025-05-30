@@ -2,12 +2,15 @@ package org.example.project.views
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -21,11 +24,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.example.project.data.Tela4State
+import org.example.project.pdf.generatePdfQuantitativo
 import org.example.project.theme.WaterLabCard
 import org.example.project.theme.WaterLabTextField
 
 @Composable
 fun Tela4() {
+
+
     var state by remember { mutableStateOf(Tela4State()) }
     val scrollState = rememberScrollState()
 
@@ -213,7 +219,79 @@ fun Tela4() {
                     }
 
                 }
-
+                    // fds 2
+                WaterLabCard {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = "C.Termotolerantes",
+                            style = MaterialTheme.typography.h6,
+                            color = MaterialTheme.colors.primary,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesDiluicao,
+                            onValueChange = { state = state.copy(termotolerantesDiluicao = it) },
+                            label = "Diluição"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesLote,
+                            onValueChange = { state = state.copy(termotolerantesLote = it) },
+                            label = "Lote"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesVal,
+                            onValueChange = { state = state.copy(termotolerantesVal = it) },
+                            label = "Val"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesPcGr,
+                            onValueChange = { state = state.copy(termotolerantesPcGr = it) },
+                            label = "PcGr"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesPcPeq,
+                            onValueChange = { state = state.copy(termotolerantesPcPeq = it) },
+                            label = "PcPeq"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesResultado,
+                            onValueChange = { state = state.copy(termotolerantesResultado = it) },
+                            label = "PcPeq"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesCepaATCC,
+                            onValueChange = { state = state.copy(termotolerantesCepaATCC = it) },
+                            label = "Cepa ATCC"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesLeituraFeitaPor,
+                            onValueChange = { state = state.copy(termotolerantesLeituraFeitaPor = it) },
+                            label = "Leitura feita por"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesData,
+                            onValueChange = { state = state.copy(termotolerantesData = it) },
+                            label = "Data"
+                        )
+                        WaterLabTextField(
+                            value = state.termotolerantesHora,
+                            onValueChange = { state = state.copy(termotolerantesHora = it) },
+                            label = "Hora"
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = {
+                        generatePdfQuantitativo(state)
+                    },
+                    modifier = Modifier.padding(bottom = 16.dp)
+                ){
+                    Text("Gerar")
+                }
             }
         }
     }
