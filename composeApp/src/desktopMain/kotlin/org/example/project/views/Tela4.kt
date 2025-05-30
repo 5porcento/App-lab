@@ -29,6 +29,7 @@ fun Tela4() {
     var state by remember { mutableStateOf(Tela4State()) }
     val scrollState = rememberScrollState()
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -144,6 +145,71 @@ fun Tela4() {
                         )
 
 
+                    }
+
+                } // fds
+
+                WaterLabCard {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = "Enterococos/Enterolert",
+                            style = MaterialTheme.typography.h6,
+                            color = MaterialTheme.colors.primary,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosDiluicao,
+                            onValueChange = { state = state.copy(enterococosDiluicao = it) },
+                            label = "Diluição"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosLote,
+                            onValueChange = { state = state.copy(enterococosLote = it) },
+                            label = "Lote"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosVal,
+                            onValueChange = { state = state.copy(enterococosVal = it) },
+                            label = "Val"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosPcGr,
+                            onValueChange = { state = state.copy(enterococosPcGr = it) },
+                            label = "PcGr"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosPcPeq,
+                            onValueChange = { state = state.copy(enterococosPcPeq = it) },
+                            label = "PcPeq"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosResultado,
+                            onValueChange = { state = state.copy(enterococosResultado = it) },
+                            label = "PcPeq"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosCepaATCC,
+                            onValueChange = { state = state.copy(enterococosCepaATCC = it) },
+                            label = "Cepa ATCC"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosLeituraFeitaPor,
+                            onValueChange = { state = state.copy(enterococosLeituraFeitaPor = it) },
+                            label = "Leitura feita por"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosData,
+                            onValueChange = { state = state.copy(enterococosData = it) },
+                            label = "Data"
+                        )
+                        WaterLabTextField(
+                            value = state.enterococosHora,
+                            onValueChange = { state = state.copy(enterococosHora = it) },
+                            label = "Hora"
+                        )
                     }
 
                 }
